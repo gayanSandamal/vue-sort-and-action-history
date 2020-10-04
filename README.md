@@ -24,10 +24,10 @@ npm run test:unit
 ```
 npm run lint
 ```
+
 ### Live URL
-```
 See [vue sort and action history](https://vue-sort-and-action-history.nayague.online/).
-```
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
