@@ -64,6 +64,7 @@ export default {
     }
   },
   components: {
+    // Import components on demand. This improves the speed of the initial loading by chunking the components.
     'c-action-card': () => import('@/components/CommitedActionCard.vue'),
     'post-card': () => import('@/components/PostCard.vue'),
     Card: () => import('@/components/common/Card.vue')
@@ -71,8 +72,9 @@ export default {
   methods: {
     getPosts() {
       getPosts(response => {
+        // Assign only the first 5 posts if the data is available
         this.posts = response.data.length ? response.data.slice(0, 5).map(o => o) : []
-      }, (error) => {
+      }, error => {
         console.error(error)
       })
     },
@@ -120,6 +122,7 @@ export default {
     }
   },
   beforeMount() {
+    // Send request after Vue initiation and before component reder 
     this.getPosts()
   }
 }
