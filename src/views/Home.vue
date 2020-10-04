@@ -5,11 +5,18 @@
         <div class="w-full md:w-1/2 md:pr-10 px-5 md:px-0">
           <h5 class="text-white font-medium text-lg">Sortable Post List</h5>
           <div class="py-5">
-            <ul class="post-list-group">
-              <li v-for="(post, index) in orderedPosts" :key="post.id" class="shadow-md">
+            <ul class="post-list-group" v-if="posts.length">
+              <li v-for="(post, index) in posts" :key="post.id" class="shadow-md">
                 <Card class="rounded">
-                  <post-card :posts="orderedPosts" :post="post" :index="index" @move-up="moveUp" @move-down="moveDown"/>
+                  <post-card :posts="posts" :post="post" :index="index" @move-up="moveUp" @move-down="moveDown"/>
                 </Card>
+              </li>
+            </ul>
+            <ul class="post-list-group" v-else>
+              <li v-for="item in 5" :key="item" class="bg-white p-3 shadow-md rounded">
+                <content-placeholders :rounded="true">
+                  <content-placeholders-heading />
+                </content-placeholders>
               </li>
             </ul>
           </div>
@@ -60,11 +67,6 @@ export default {
     'c-action-card': () => import('@/components/CommitedActionCard.vue'),
     'post-card': () => import('@/components/PostCard.vue'),
     Card: () => import('@/components/common/Card.vue')
-  },
-  computed: {
-    orderedPosts() {
-      return this.posts
-    }
   },
   methods: {
     getPosts() {
